@@ -1,8 +1,7 @@
 package Projekat1;
 
 public class Enemy {
-
-    private String type;
+    private String type = "Nepoznat";
     private int x;
     private int y;
     private int width;
@@ -10,43 +9,26 @@ public class Enemy {
     private int damage;
 
     public Enemy(String type, int x, int y, int width, int height, int damage) {
-
         setType(type);
-
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-
         setDamage(damage);
-    }
-
-    public void setType(String type) {
-
-        if (type == null || type.trim().equals("")) {
-
-            throw new IllegalArgumentException(
-                    "Tip neprijatelja ne smije biti prazan!"
-            );
-        }
-
-        this.type = type.trim();
-    }
-
-    public void setDamage(int damage) {
-
-        if (damage < 0 || damage > 100) {
-
-            throw new IllegalArgumentException(
-                    "Damage mora biti izmedju 0 i 100!"
-            );
-        }
-
-        this.damage = damage;
     }
 
     public String getType() {
         return type;
+    }
+
+    public void setType(String type) {
+        type = type.trim();
+
+        if (type.equals("")) {
+            System.out.println("Tip neprijatelja ne smije biti prazan!");
+        } else {
+            this.type = type;
+        }
     }
 
     public int getX() {
@@ -85,17 +67,15 @@ public class Enemy {
         return damage;
     }
 
-    public boolean collidesWith(Player p) {
-
-        return x < p.getX() + p.getWidth()
-                && x + width > p.getX()
-                && y < p.getY() + p.getHeight()
-                && y + height > p.getY();
+    public void setDamage(int damage) {
+        if (damage < 0 || damage > 100) {
+            System.out.println("Damage mora biti izmedju 0 i 100!");
+        } else {
+            this.damage = damage;
+        }
     }
 
     public String toString() {
-
-        return "Enemy[" + type + "] @ (" + x + "," + y + ") "
-                + width + "x" + height + " DMG=" + damage;
+        return "Enemy[" + type + "] @ (" + x + "," + y + ") " + width + "x" + height + " DMG=" + damage;
     }
 }
